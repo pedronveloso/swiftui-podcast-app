@@ -13,6 +13,7 @@
 		1E7FFD0524AD436A008977BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E7FFD0424AD436A008977BA /* Assets.xcassets */; };
 		1E7FFD0824AD436A008977BA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E7FFD0724AD436A008977BA /* Preview Assets.xcassets */; };
 		1E7FFD0B24AD436A008977BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7FFD0924AD436A008977BA /* LaunchScreen.storyboard */; };
+		1E7FFD1524AD4510008977BA /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7FFD1424AD4510008977BA /* NetworkingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		1E7FFD0724AD436A008977BA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1E7FFD0A24AD436A008977BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E7FFD0C24AD436A008977BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E7FFD1424AD4510008977BA /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		1E7FFCFD24AD4367008977BA /* podcast-app */ = {
 			isa = PBXGroup;
 			children = (
+				1E7FFD1324AD4446008977BA /* Networking */,
 				1E7FFCFE24AD4367008977BA /* AppDelegate.swift */,
 				1E7FFD0024AD4367008977BA /* SceneDelegate.swift */,
 				1E7FFD0224AD4367008977BA /* ContentView.swift */,
@@ -73,6 +76,14 @@
 				1E7FFD0724AD436A008977BA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1E7FFD1324AD4446008977BA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1E7FFD1424AD4510008977BA /* NetworkingManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E7FFCFF24AD4367008977BA /* AppDelegate.swift in Sources */,
+				1E7FFD1524AD4510008977BA /* NetworkingManager.swift in Sources */,
 				1E7FFD0124AD4367008977BA /* SceneDelegate.swift in Sources */,
 				1E7FFD0324AD4367008977BA /* ContentView.swift in Sources */,
 			);

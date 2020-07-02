@@ -10,7 +10,15 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        VStack{
+            Text("Hello, World!")
+            Button(action: {
+                let net = NetworkingManager.init()
+                net.getFeed()
+            }) {
+                Text("Make request")
+            }
+        }
     }
 }
 

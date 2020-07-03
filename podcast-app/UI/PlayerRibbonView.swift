@@ -11,11 +11,15 @@ import struct Kingfisher.KFImage
 
 struct PlayerRibbonView: View {
     
-    let podcastItem: PodcastItemDTO
+    @ObservedObject var playbackManager : PlaybackManager
+    
     
     var body: some View {
+        let podcastItem = self.playbackManager.mediaState.selectedPodcast!
+        
+        
         let url = URL(string: podcastItem.imageURL)
-        let shorterTitle = podcastItem1.title[..<15]
+        let shorterTitle = podcastItem.title
         
         return ZStack {
             Rectangle()
@@ -45,7 +49,7 @@ struct PlayerRibbonView: View {
                 }
                 
                 Spacer()
-                PlaybackControls()
+                PlaybackControlsView(playbackManager: playbackManager)
                 Spacer().frame(width: sideMargin*2)
             }
         }
@@ -56,17 +60,17 @@ struct PlayerRibbonView: View {
 
 struct PlayerRibbonView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerRibbonView(podcastItem: podcastItem1)
+        PlayerRibbonView(playbackManager: PlaybackManager())
     }
 }
 
-struct PlaybackControls : View {
+struct PlaybackControlsView : View {
     
-    @ObservedObject var playbackManager = PlaybackManager()
+    @ObservedObject var playbackManager : PlaybackManager
     
     var body: some View {
         let icon: String
-        if (playbackManager.mediaState.isPlaying){
+        if (playbackManager.mediaState.isPlaying()){
             icon = "pause"
         } else {
             icon = "play"
@@ -86,8 +90,8 @@ struct PlaybackControls : View {
             .frame(width: 20)
             
             Button(action: {
-                self.playbackManager.playPause(media: podcastItem1.playbackItems.first!)
-              print("back button pressed")
+                self.playbackManager.playPauseToggleButton()
+              print("play button pressed")
 
             }) {
                 Image(systemName: icon)

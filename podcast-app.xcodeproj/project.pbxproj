@@ -69,13 +69,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		1E03668924AE390F00169650 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		1E03668A24AE391800169650 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,7 +106,6 @@
 				EB18F46B24AFC67E00AE55E1 /* Extensions */,
 				EB18F46224AEB23600AE55E1 /* Dev */,
 				1E03668A24AE391800169650 /* UI */,
-				1E03668924AE390F00169650 /* New Group */,
 				1E7FFD1324AD4446008977BA /* Networking */,
 				1E7FFCFE24AD4367008977BA /* AppDelegate.swift */,
 				1E7FFD0024AD4367008977BA /* SceneDelegate.swift */,

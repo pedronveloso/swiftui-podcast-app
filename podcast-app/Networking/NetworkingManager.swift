@@ -32,6 +32,13 @@ struct PodcastItemDTO : Decodable {
             return "N/A"
         }
     }
+    
+    func getRelevantMedia() -> PlaybackDTO? {
+        guard let playbackItem = playbackItems.first else {
+            return nil
+        }
+        return playbackItem
+    }
 }
 
 struct PlaybackDTO : Decodable {

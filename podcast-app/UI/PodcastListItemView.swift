@@ -11,46 +11,52 @@ import struct Kingfisher.KFImage
 
 struct PodcastListItemView: View {
     
+    @ObservedObject var playbackManager : PlaybackManager
+    
     let podcastItem: PodcastItemDTO
     
     var body: some View {
         let url = URL(string: podcastItem.imageURL)
         
         return
-    
             VStack {
             HStack(spacing: 20) {
                 CoverArt(url: url)
                 
-                VStack {
-                    // Title.
-                    Text(podcastItem.title)
-                        .font(.headline)
-                        .foregroundColor(Color("FontColorMain"))
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(2)
-                        .frame(maxWidth: .infinity,
-                               alignment: .leading)
-                    
-                    // Description
-                    Spacer().frame(height: 2)
-                    Text(podcastItem.contentText)
-                        .foregroundColor(Color("FontColorMain"))
-                        .font(.subheadline)
-                        .lineLimit(2)
-                        .frame(maxWidth: .infinity,
-                    alignment: .leading)
-                    
-                    // Date
-                    // TODO: Use date.
-                    Spacer().frame(height: 6)
-                    Text("2h ago")
-                        .font(.caption)
-                        .foregroundColor(Color("FontColorSubtle"))
-                        .lineLimit(1)
-                        .frame(maxWidth: .infinity,
-                    alignment: .leading)
+                Button(action: {
+                    self.playbackManager.play(podcast: self.podcastItem)
+                }) {
+                    VStack {
+                        // Title.
+                        Text(podcastItem.title)
+                            .font(.headline)
+                            .foregroundColor(Color("FontColorMain"))
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(2)
+                            .frame(maxWidth: .infinity,
+                                   alignment: .leading)
+                        
+                        // Description
+                        Spacer().frame(height: 2)
+                        Text(podcastItem.contentText)
+                            .foregroundColor(Color("FontColorMain"))
+                            .font(.subheadline)
+                            .lineLimit(2)
+                            .frame(maxWidth: .infinity,
+                        alignment: .leading)
+                        
+                        // Date
+                        // TODO: Use date.
+                        Spacer().frame(height: 6)
+                        Text("2h ago")
+                            .font(.caption)
+                            .foregroundColor(Color("FontColorSubtle"))
+                            .lineLimit(1)
+                            .frame(maxWidth: .infinity,
+                        alignment: .leading)
+                    }
                 }
+                
         }
         }.background(Color("LightBackground"))
     }
@@ -59,7 +65,7 @@ struct PodcastListItemView: View {
 
 struct PodcastListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        return PodcastListItemView(podcastItem: podcastItem1)
+        return PodcastListItemView(playbackManager: PlaybackManager(), podcastItem: podcastItem1)
     }
 }
 

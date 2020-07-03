@@ -21,6 +21,7 @@ struct HeaderView: View {
                 PodcastHeaderText(title: podcast.title)
            }
        }
+    
 }
 
 struct HeaderView_Previews: PreviewProvider {

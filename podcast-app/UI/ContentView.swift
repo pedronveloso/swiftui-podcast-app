@@ -44,14 +44,15 @@ struct ContentView: View, NetworkResult  {
                 
                 // Render items.
                 List(results[0].podcasts, id: \.id) { item in
-                    PodcastListItemView(podcastItem: item)
-                    
+                        PodcastListItemView(playbackManager: self.playbackManager, podcastItem: item)
                 }
                 
                 // Player Ribbon.
-                PlayerRibbonView(podcastItem: podcastItem1)
+                if (playbackManager.mediaState.selectedPodcast != nil){
+                    PlayerRibbonView(playbackManager: playbackManager)
+                }
             } else {
-                // TODO : Show loading state.
+                // TODO : Show better looking loading state.
                 Text("Loading Podcast")
                 .font(.title)
                 .onAppear(perform: loadPodcasts)

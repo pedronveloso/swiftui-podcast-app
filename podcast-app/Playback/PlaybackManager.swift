@@ -102,7 +102,7 @@ class PlaybackManager : ObservableObject {
             avPlayer.play()
         }
         
-        notificationCenter.addObserver(self, selector: #selector(self.reachedEnd), name: AVAudioSession.interruptionNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(self.interruptionCallback), name: AVAudioSession.interruptionNotification, object: nil)
         let info: [String: Any] = [
             MPMediaItemPropertyTitle: podcast.title,
         ]
@@ -134,5 +134,21 @@ class PlaybackManager : ObservableObject {
     
     @objc private func reachedEnd() {
         mediaState.state = PlaybackState.STOPPED
+    }
+    
+    // MARK : notifications.
+    
+    @objc private func interruptionCallback(notification: NSNotification) {
+        if let value = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? NSNumber,
+            let type = AVAudioSession.InterruptionType(rawValue: value.uintValue){
+            switch type {
+            case .began:
+                playPauseToggleButton()
+            case .ended:
+                playPauseToggleButton()
+            @unknown default:
+                fatalError()
+            }
+        }
     }
 }

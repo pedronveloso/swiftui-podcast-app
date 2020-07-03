@@ -13,10 +13,30 @@ struct PodcastItemDTO : Decodable {
     let title: String
     let contentText: String
     let imageURL : String
+    let playbackItems : [PlaybackDTO]
     
     enum CodingKeys: String, CodingKey {
-        case id, title, contentText, imageURL = "image"
+        case id, title, contentText, playbackItems = "attachments", imageURL = "image"
     }
+    
+    /*
+     Get the total duration of this podcast, in a human readable format.
+     Eg.: "2:04s" (min/seconds)
+     */
+    func totalTimeDisplay() -> String {
+        if let firstElem = playbackItems.first {
+            let min = firstElem.durationInSeconds / 60
+            let sec = firstElem.durationInSeconds - (min*60)
+            return "\(min):\(sec)s"
+        } else {
+            return "N/A"
+        }
+    }
+}
+
+struct PlaybackDTO : Decodable {
+    let url: String
+    let durationInSeconds: Int
 }
 
 

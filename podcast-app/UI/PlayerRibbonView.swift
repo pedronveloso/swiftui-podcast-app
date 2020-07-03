@@ -61,18 +61,39 @@ struct PlayerRibbonView_Previews: PreviewProvider {
 }
 
 struct PlaybackControls : View {
+    
+    @ObservedObject var playbackManager = PlaybackManager()
+    
     var body: some View {
-        HStack{
+        let icon: String
+        if (playbackManager.mediaState.isPlaying){
+            icon = "pause"
+        } else {
+            icon = "play"
+        }
+        
+        return HStack{
+            Button(action: {
+              print("back button pressed")
+
+            }) {
+                Image(systemName: "gobackward.10")
+                .imageScale(.large)
+                .foregroundColor(Color.white)
+            }
             
-            Image(systemName: "gobackward.10")
-            .imageScale(.large)
-            .foregroundColor(Color.white)
             Spacer()
             .frame(width: 20)
             
-            Image(systemName: "play")
-            .imageScale(.large)
-            .foregroundColor(Color.white)
+            Button(action: {
+                self.playbackManager.playPause(media: podcastItem1.playbackItems.first!)
+              print("back button pressed")
+
+            }) {
+                Image(systemName: icon)
+                .imageScale(.large)
+                .foregroundColor(Color.white)
+            }
             
             Spacer()
             .frame(width: 20)

@@ -22,6 +22,7 @@
 		EB18F46A24AFC31700AE55E1 /* UiDimens.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46924AFC31700AE55E1 /* UiDimens.swift */; };
 		EB18F46D24AFC69500AE55E1 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46C24AFC69500AE55E1 /* StringExtensions.swift */; };
 		EB18F47124AFCBAA00AE55E1 /* PlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47024AFCBAA00AE55E1 /* PlaybackManager.swift */; };
+		EB18F47324AFDE3F00AE55E1 /* AVPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47224AFDE3F00AE55E1 /* AVPlayerExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		EB18F46924AFC31700AE55E1 /* UiDimens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiDimens.swift; sourceTree = "<group>"; };
 		EB18F46C24AFC69500AE55E1 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		EB18F47024AFCBAA00AE55E1 /* PlaybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackManager.swift; sourceTree = "<group>"; };
+		EB18F47224AFDE3F00AE55E1 /* AVPlayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				EB18F46F24AFCB9400AE55E1 /* Playback */,
-				EB18F46E24AFCB8E00AE55E1 /* New Group1 */,
 				EB18F46B24AFC67E00AE55E1 /* Extensions */,
 				EB18F46224AEB23600AE55E1 /* Dev */,
 				1E03668A24AE391800169650 /* UI */,
@@ -160,15 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				EB18F46C24AFC69500AE55E1 /* StringExtensions.swift */,
+				EB18F47224AFDE3F00AE55E1 /* AVPlayerExtensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		EB18F46E24AFCB8E00AE55E1 /* New Group1 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group1";
 			sourceTree = "<group>";
 		};
 		EB18F46F24AFCB9400AE55E1 /* Playback */ = {
@@ -305,6 +300,7 @@
 				EB18F46824AF899A00AE55E1 /* PlayerRibbonView.swift in Sources */,
 				EB18F46424AEB24900AE55E1 /* DevConstants.swift in Sources */,
 				EB18F46624AF763900AE55E1 /* HeaderView.swift in Sources */,
+				EB18F47324AFDE3F00AE55E1 /* AVPlayerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

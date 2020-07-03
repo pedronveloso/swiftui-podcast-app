@@ -10,6 +10,8 @@ import SwiftUI
 
 struct ContentView: View, NetworkResult  {
     
+    @ObservedObject var playbackManager = PlaybackManager()
+    
     func loadPodcasts(){
         let net = NetworkingManager.init(callback: self)
         net.getFeed()

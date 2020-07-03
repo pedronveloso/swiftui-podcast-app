@@ -37,6 +37,12 @@ struct PodcastItemDTO : Decodable {
 struct PlaybackDTO : Decodable {
     let url: String
     let durationInSeconds: Int
+    
+    func urlInstance() -> URL? {
+        guard let url = URL(string: url) else { return nil }
+        return url
+    }
+    
 }
 
 

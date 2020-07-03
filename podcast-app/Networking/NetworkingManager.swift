@@ -9,10 +9,10 @@
 import Foundation
 
 struct PodcastItemDTO : Decodable {
-    var id: String
-    var title: String
-    var contentText: String
-    var imageURL : String
+    let id: String
+    let title: String
+    let contentText: String
+    let imageURL : String
     
     enum CodingKeys: String, CodingKey {
         case id, title, contentText, imageURL = "image"
@@ -21,18 +21,28 @@ struct PodcastItemDTO : Decodable {
 
 
 struct PodcastPageDTO : Decodable {
-    var title: String
-    var homePageUrl: String
-    var nextUrl: String
-    var description: String
-    var podcasts : [PodcastItemDTO]
+    let feedUrl: String // Serves as a way to uniquely identify this object.
+    let title: String
+    let homePageUrl: String
+    let nextUrl: String
+    let description: String
+    let coverArtUrl: String
+    let podcasts : [PodcastItemDTO]
     
     enum CodingKeys: String, CodingKey {
-        case title, homePageUrl,nextUrl,description, podcasts = "items"
+        case feedUrl, title, homePageUrl,nextUrl,description, coverArtUrl = "icon", podcasts = "items"
     }
 }
 
+protocol NetworkResult {
+    func onSuccess(podcastPage: PodcastPageDTO)
+    func onFailure(errorMessage: String)
+}
+
+
 struct NetworkingManager {
+    
+    let callback: NetworkResult
     
     let NPRUrl = "https://feeds.npr.org/510312/feed.json"
     
@@ -43,7 +53,7 @@ struct NetworkingManager {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 300.0
         config.timeoutIntervalForResource = 300.0
-
+        
         let session = URLSession(configuration: config)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -53,7 +63,12 @@ struct NetworkingManager {
     }
     
     func handleResponse(data: Data?, response: URLResponse?, err: Error?){
-        // TODO : handle error
+        // Handle connectivity errors.
+        if (err != nil){
+            callback.onFailure(errorMessage: "Error when trying to handle request. E.: \(err.debugDescription)")
+            return
+        }
+        
         if let response = response {
             print(response)
         }
@@ -67,10 +82,11 @@ struct NetworkingManager {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             do{
-             let podcasts = try decoder.decode(PodcastPageDTO.self, from: safeData)
-                print(podcasts.podcasts[0])
+                let podcasts = try decoder.decode(PodcastPageDTO.self, from: safeData)
+                // Notify viewcontroller of results.
+                callback.onSuccess(podcastPage: podcasts)
             } catch {
-                // TODO : handle decoding error
+                callback.onFailure(errorMessage: "Error when trying to decode contents. E.: \(error.localizedDescription)")
                 print(error)
             }
         }

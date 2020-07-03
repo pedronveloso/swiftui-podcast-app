@@ -16,24 +16,6 @@
       "appearances" : [
         {
           "appearance" : "luminosity",
-          "value" : "light"
-        }
-      ],
-      "color" : {
-        "color-space" : "display-p3",
-        "components" : {
-          "alpha" : "1.000",
-          "blue" : "0.471",
-          "green" : "0.411",
-          "red" : "0.233"
-        }
-      },
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
           "value" : "dark"
         }
       ],

@@ -26,6 +26,16 @@ struct ContentView: View, NetworkResult  {
     @State var results : [PodcastPageDTO]
     
     var body: some View {
+        UITableView.appearance().separatorStyle = .none
+      UITableViewCell.appearance().backgroundColor = UIColor(named: "LightBackground")
+      UITableView.appearance().backgroundColor = UIColor(named: "LightBackground")
+        
+        return ZStack{
+            // Background.
+            Rectangle()
+            .fill(Color("LightBackground"))
+                
+            
         VStack{
             if (results.isEmpty == false){
                 HeaderView(podcast: results[0])
@@ -33,7 +43,11 @@ struct ContentView: View, NetworkResult  {
                 // Render items.
                 List(results[0].podcasts, id: \.id) { item in
                     PodcastListItemView(podcastItem: item)
+                    
                 }
+                
+                // Player Ribbon.
+                PlayerRibbonView(podcastItem: podcastItem1)
             } else {
                 // TODO : Show loading state.
                 Text("Loading Podcast")
@@ -48,11 +62,21 @@ struct ContentView: View, NetworkResult  {
                 }
             }
         }
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(results: [podcastPreviewPage])
+        // The following allows us to preview both Light and Dark themes.
+        Group {
+             ContentView(results: [podcastPreviewPage])
+              .environment(\.colorScheme, .light)
+
+            ContentView(results: [podcastPreviewPage])
+              .environment(\.colorScheme, .dark)
+        }
+       
     }
 }

@@ -46,7 +46,7 @@ struct PodcastHeaderText: View {
     }
 }
 
-struct PodcastCoverArt: View {
+private struct PodcastCoverArt: View {
     
     let imageUrl: URL?
     

@@ -9,4 +9,6 @@
 import SwiftUI
 import CoreGraphics
 
+
 let sideMargin = CGFloat(10.0)
+let footerHeight = CGFloat(64.0)

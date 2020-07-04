@@ -19,11 +19,14 @@
 		EB18F46424AEB24900AE55E1 /* DevConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46324AEB24900AE55E1 /* DevConstants.swift */; };
 		EB18F46624AF763900AE55E1 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46524AF763900AE55E1 /* HeaderView.swift */; };
 		EB18F46824AF899A00AE55E1 /* PlayerRibbonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46724AF899A00AE55E1 /* PlayerRibbonView.swift */; };
-		EB18F46A24AFC31700AE55E1 /* UiDimens.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46924AFC31700AE55E1 /* UiDimens.swift */; };
+		EB18F46A24AFC31700AE55E1 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46924AFC31700AE55E1 /* UIConstants.swift */; };
 		EB18F46D24AFC69500AE55E1 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46C24AFC69500AE55E1 /* StringExtensions.swift */; };
 		EB18F47124AFCBAA00AE55E1 /* PlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47024AFCBAA00AE55E1 /* PlaybackManager.swift */; };
 		EB18F47324AFDE3F00AE55E1 /* AVPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47224AFDE3F00AE55E1 /* AVPlayerExtensions.swift */; };
 		EB18F47524B006C800AE55E1 /* PodcastDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47424B006C800AE55E1 /* PodcastDetails.swift */; };
+		EB18F47724B0246500AE55E1 /* CommonPlaybackElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47624B0246500AE55E1 /* CommonPlaybackElements.swift */; };
+		EB18F47A24B0255E00AE55E1 /* NetworkModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47924B0255E00AE55E1 /* NetworkModels.swift */; };
+		EB18F47C24B0259A00AE55E1 /* CoverArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47B24B0259A00AE55E1 /* CoverArtView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,11 +46,14 @@
 		EB18F46324AEB24900AE55E1 /* DevConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevConstants.swift; sourceTree = "<group>"; };
 		EB18F46524AF763900AE55E1 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB18F46724AF899A00AE55E1 /* PlayerRibbonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRibbonView.swift; sourceTree = "<group>"; };
-		EB18F46924AFC31700AE55E1 /* UiDimens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiDimens.swift; sourceTree = "<group>"; };
+		EB18F46924AFC31700AE55E1 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		EB18F46C24AFC69500AE55E1 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		EB18F47024AFCBAA00AE55E1 /* PlaybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackManager.swift; sourceTree = "<group>"; };
 		EB18F47224AFDE3F00AE55E1 /* AVPlayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerExtensions.swift; sourceTree = "<group>"; };
 		EB18F47424B006C800AE55E1 /* PodcastDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetails.swift; sourceTree = "<group>"; };
+		EB18F47624B0246500AE55E1 /* CommonPlaybackElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPlaybackElements.swift; sourceTree = "<group>"; };
+		EB18F47924B0255E00AE55E1 /* NetworkModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModels.swift; sourceTree = "<group>"; };
+		EB18F47B24B0259A00AE55E1 /* CoverArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverArtView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +84,10 @@
 				1E03668B24AE394500169650 /* PodcastListItemView.swift */,
 				EB18F46524AF763900AE55E1 /* HeaderView.swift */,
 				EB18F46724AF899A00AE55E1 /* PlayerRibbonView.swift */,
-				EB18F46924AFC31700AE55E1 /* UiDimens.swift */,
+				EB18F46924AFC31700AE55E1 /* UIConstants.swift */,
 				EB18F47424B006C800AE55E1 /* PodcastDetails.swift */,
+				EB18F47624B0246500AE55E1 /* CommonPlaybackElements.swift */,
+				EB18F47B24B0259A00AE55E1 /* CoverArtView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -105,6 +113,7 @@
 		1E7FFCFD24AD4367008977BA /* podcast-app */ = {
 			isa = PBXGroup;
 			children = (
+				EB18F47824B0253800AE55E1 /* Models */,
 				EB18F46F24AFCB9400AE55E1 /* Playback */,
 				EB18F46B24AFC67E00AE55E1 /* Extensions */,
 				EB18F46224AEB23600AE55E1 /* Dev */,
@@ -167,6 +176,14 @@
 				EB18F47024AFCBAA00AE55E1 /* PlaybackManager.swift */,
 			);
 			path = Playback;
+			sourceTree = "<group>";
+		};
+		EB18F47824B0253800AE55E1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB18F47924B0255E00AE55E1 /* NetworkModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,14 +305,17 @@
 				1E7FFCFF24AD4367008977BA /* AppDelegate.swift in Sources */,
 				1E7FFD1524AD4510008977BA /* NetworkingManager.swift in Sources */,
 				EB18F46D24AFC69500AE55E1 /* StringExtensions.swift in Sources */,
-				EB18F46A24AFC31700AE55E1 /* UiDimens.swift in Sources */,
+				EB18F46A24AFC31700AE55E1 /* UIConstants.swift in Sources */,
 				1E7FFD0124AD4367008977BA /* SceneDelegate.swift in Sources */,
 				1E7FFD0324AD4367008977BA /* ContentView.swift in Sources */,
 				1E03668C24AE394500169650 /* PodcastListItemView.swift in Sources */,
 				EB18F46824AF899A00AE55E1 /* PlayerRibbonView.swift in Sources */,
 				EB18F47524B006C800AE55E1 /* PodcastDetails.swift in Sources */,
+				EB18F47A24B0255E00AE55E1 /* NetworkModels.swift in Sources */,
 				EB18F46424AEB24900AE55E1 /* DevConstants.swift in Sources */,
 				EB18F46624AF763900AE55E1 /* HeaderView.swift in Sources */,
+				EB18F47724B0246500AE55E1 /* CommonPlaybackElements.swift in Sources */,
+				EB18F47C24B0259A00AE55E1 /* CoverArtView.swift in Sources */,
 				EB18F47324AFDE3F00AE55E1 /* AVPlayerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

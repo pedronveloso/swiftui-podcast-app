@@ -28,32 +28,24 @@ struct PlayerRibbonView: View {
         return ZStack {
             Rectangle()
                 .fill(Color("FooterColor"))
-                .frame(height: 64)
+                .frame(height: footerHeight)
             
             HStack{
                 Spacer().frame(width: sideMargin)
-                RibbonCoverArt(url: url)
+                CoverArtView(url: url, size: 48, cornerRadius: 2, shadowSize: 2)
                 
                 // Title and Progress.
                 Button(action: {
-                    print("Click to show details")
+                    // Clicking this area will show the item details screen.
                     self.router.isShowingDetails = true
 
                 }) {
                     VStack{
-                        
-                        Text(podcastItem.title)
-                        .foregroundColor(Color("FontColorMain"))
-                            .font(.footnote)
-                        .lineLimit(1)
-                        .frame(maxWidth: .infinity,
-                        alignment: .leading)
+                        TitleView(podcastItem: podcastItem)
                         
                         PlaybackTextProgressView(playbackManager: playbackManager, podcastItem: podcastItem, align: .leading)
-                        
                     }
                 }
-                
                 
                 Spacer()
                 PlaybackControlsView(playbackManager: playbackManager)
@@ -70,91 +62,16 @@ struct PlayerRibbonView_Previews: PreviewProvider {
     }
 }
 
-struct PlaybackTextProgressView : View {
+private struct TitleView: View {
     
-    @ObservedObject var playbackManager : PlaybackManager
     let podcastItem: PodcastItemDTO
-    let align: Alignment
     
-    var body : some View {
-        let progressText = "\(self.playbackManager.mediaState.progressSecondsDisplay()) / \(podcastItem.totalTimeDisplay())"
-        
-        return Text(progressText)
+    var body: some View {
+        Text(podcastItem.title)
         .foregroundColor(Color("FontColorMain"))
             .font(.footnote)
         .lineLimit(1)
         .frame(maxWidth: .infinity,
-        alignment: align)
-    }
-}
-
-struct PlaybackControlsView : View {
-    
-    @ObservedObject var playbackManager : PlaybackManager
-    
-    var body: some View {
-        let icon: String
-        if (playbackManager.mediaState.isPlaying()){
-            icon = "pause"
-        } else {
-            icon = "play"
-        }
-        
-        return HStack{
-            Button(action: {
-                self.playbackManager.rewindPlayback()
-              print("back button pressed")
-
-            }) {
-                Image(systemName: "gobackward.10")
-                .imageScale(.large)
-                .foregroundColor(Color.white)
-            }
-            
-            Spacer()
-            .frame(width: 20)
-            
-            Button(action: {
-                self.playbackManager.playPauseToggleButton()
-              print("play button pressed")
-
-            }) {
-                Image(systemName: icon)
-                .imageScale(.large)
-                .foregroundColor(Color.white)
-            }
-            
-            Spacer()
-            .frame(width: 20)
-            
-            Button(action: {
-                self.playbackManager.forwardPlayback()
-              print("forward button pressed")
-
-            }) {
-                Image(systemName: "goforward.10")
-                .imageScale(.large)
-                .foregroundColor(Color.white)
-            }
-        }
-    }
-}
-
-struct RibbonCoverArt: View {
-    
-    let url: URL?
-    
-    var body: some View {
-        KFImage(url)
-            .placeholder {
-                // Placeholder thumbnail.
-                Image("PodcastThumbnail")
-                
-        }
-        .resizable()
-        .aspectRatio(contentMode: ContentMode.fill)
-        .frame(width: 48, height: 48)
-        .cornerRadius(2)
-        .shadow(radius: 2)
+        alignment: .leading)
     }
 }

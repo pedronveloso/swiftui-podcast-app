@@ -16,15 +16,11 @@ struct ContentView: View {
     
     @ObservedObject var router = Router()
     
-    //@State private var isShowingDetailView = false
-    
     var body: some View {
+        // Set the list elements background.
         UITableView.appearance().separatorStyle = .none
         UITableViewCell.appearance().backgroundColor = UIColor(named: "LightBackground")
         UITableView.appearance().backgroundColor = UIColor(named: "LightBackground")
-        
-        print("isShowdinDetailsView value: \(self.router.isShowingDetails)")
-        //self.isShowingDetailView = self.router.isShowingDetails
         
         return NavigationView {
             ZStack{

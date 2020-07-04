@@ -41,14 +41,14 @@ class Router: ObservableObject {
 
 class PlaybackManager : ObservableObject {
     
-   @Published var mediaState = MediaState()
+    @Published var mediaState = MediaState()
     
-   private let avPlayer: AVPlayer
+    private let avPlayer: AVPlayer
     
     // Display playback on the system controls.
     private let notificationCenter: NotificationCenter
     private let systemPlayer: MPNowPlayingInfoCenter
-   
+    
     // MARK: Start and Stop.
     
     init(avPlayer: AVPlayer = AVPlayer(),
@@ -87,21 +87,21 @@ class PlaybackManager : ObservableObject {
             
         }
         if (avPlayer.isPlaying()){
-               pauseMedia()
-           } else {
-               playMedia(with: podcast)
-           }
+            pauseMedia()
+        } else {
+            playMedia(with: podcast)
+        }
     }
     
     func rewindPlayback(){
         let secondsToAdvance = 10.0
         
         let playerCurrentTime = CMTimeGetSeconds(avPlayer.currentTime())
-            var newTime = playerCurrentTime - secondsToAdvance
-
-            if newTime < 0 {
-                newTime = 0
-            }
+        var newTime = playerCurrentTime - secondsToAdvance
+        
+        if newTime < 0 {
+            newTime = 0
+        }
         let timeResult: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
         avPlayer.seek(to: timeResult, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
     }
@@ -114,17 +114,26 @@ class PlaybackManager : ObservableObject {
         }
         let playerCurrentTime = CMTimeGetSeconds(avPlayer.currentTime())
         let newTime = playerCurrentTime + secondsToAdvance
-
+        
         if newTime < (CMTimeGetSeconds(duration) - secondsToAdvance) {
-
+            
             let timeResult: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
             avPlayer.seek(to: timeResult, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-
+            
         }
     }
     
     func seekToPosition(position: Float){
-        // TODO
+        if (position < 0.1){
+            return
+        }
+        guard let duration  = avPlayer.currentItem?.duration else {
+            return
+        }
+        let newPosition = CMTimeGetSeconds(duration) * Double(position)
+        let timeResult: CMTime = CMTimeMake(value: Int64(newPosition as Float64), timescale: 1)
+        avPlayer.seek(to: timeResult, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+        
     }
     
     func play(podcast: PodcastItemDTO){

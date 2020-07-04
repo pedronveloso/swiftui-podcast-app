@@ -9,11 +9,13 @@
 import SwiftUI
 import struct Kingfisher.KFImage
 
+/*
+ Podcast details screen.
+ */
 struct PodcastDetails: View {
     
     @ObservedObject var playbackManager : PlaybackManager
     
-    @State private var sliderValue = 0.0
     private let previewPodcastItem: PodcastItemDTO = podcastItem1
     
     var body: some View {
@@ -32,45 +34,25 @@ struct PodcastDetails: View {
             
             VStack{
                 Spacer().frame(height: 30)
-                DetailsCoverArt(url: url)
-                Text(podcastItem.title)
-                    .foregroundColor(Color("FontColorMain"))
-                    .font(.headline)
-                    .lineLimit(2)
-                    .padding(sideMargin)
-                    .frame(maxWidth: .infinity,
-                           alignment: .center)
+                CoverArtView(url: url, size: 192, cornerRadius: 6, shadowSize: 6)
                 
-                Text(podcastItem.contentText)
-                    .foregroundColor(Color("FontColorMain"))
-                    .font(.subheadline)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(8)
-                    .padding(sideMargin)
-                    .frame(maxWidth: .infinity,
-                           alignment: .center)
+                TitleAndDescriptionView(podcastItem: podcastItem)
+                Spacer().frame(height: 10)
+                
                 PlaybackControlsView(playbackManager: playbackManager)
-                
-                Slider(value: Binding(
-                    get: {
-                        self.sliderValue
-                },
-                    set: {(newValue) in
-                        print("Will slide to: \(newValue)")
-                        self.sliderValue = newValue
-                        self.playbackManager.seekToPosition(position: Float(newValue))
-                }
-                )).padding(sideMargin)
-                
+                SliderView(playbackManager: playbackManager)
                 PlaybackTextProgressView(playbackManager: playbackManager, podcastItem: podcastItem, align: .center)
                 
+                // Some space at the bottom for aesthetics.
                 Spacer().frame(height: 20)
                 
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.all)
     }
 }
+
 
 struct PodcastDetails_Previews: PreviewProvider {
     static var previews: some View {
@@ -78,21 +60,48 @@ struct PodcastDetails_Previews: PreviewProvider {
     }
 }
 
-struct DetailsCoverArt: View {
+private struct TitleAndDescriptionView : View {
     
-    let url: URL?
+    let podcastItem: PodcastItemDTO
     
     var body: some View {
-        KFImage(url)
-            .placeholder {
-                // Placeholder thumbnail.
-                Image("PodcastThumbnail")
-                
+        VStack{
+            Text(podcastItem.title)
+                .foregroundColor(Color("FontColorMain"))
+                .font(.headline)
+                .lineLimit(2)
+                .padding(sideMargin)
+                .frame(maxWidth: .infinity,
+                       alignment: .center)
+            
+            Text(podcastItem.contentText)
+                .foregroundColor(Color("FontColorMain"))
+                .font(.subheadline)
+                .multilineTextAlignment(.center)
+                .lineLimit(8)
+                .padding(sideMargin)
+                .frame(maxWidth: .infinity,
+                       alignment: .center)
+            
         }
-        .resizable()
-        .aspectRatio(contentMode: ContentMode.fill)
-        .frame(width: 192, height: 192)
-        .cornerRadius(6)
-        .shadow(radius: 6)
+    }
+}
+
+private struct SliderView: View {
+    
+    @ObservedObject var playbackManager : PlaybackManager
+    @State private var sliderValue = 0.0
+    
+    var body: some View {
+        Slider(value: Binding(
+            get: {
+                self.sliderValue
+        },
+            set: {(newValue) in
+                print("Will slide to: \(newValue)")
+                self.sliderValue = newValue
+                self.playbackManager.seekToPosition(position: Float(newValue))
+        }
+        )).padding(sideMargin)
     }
 }

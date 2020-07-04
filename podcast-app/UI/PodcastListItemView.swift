@@ -21,7 +21,7 @@ struct PodcastListItemView: View {
         return
             VStack {
             HStack(spacing: 20) {
-                CoverArt(url: url)
+                CoverArtView(url: url, size: 96, cornerRadius: 4, shadowSize: 4)
                 
                 Button(action: {
                     self.playbackManager.play(podcast: self.podcastItem)
@@ -66,24 +66,5 @@ struct PodcastListItemView: View {
 struct PodcastListItemView_Previews: PreviewProvider {
     static var previews: some View {
         return PodcastListItemView(playbackManager: PlaybackManager(), podcastItem: podcastItem1)
-    }
-}
-
-struct CoverArt: View {
-    
-    let url: URL?
-    
-    var body: some View {
-        KFImage(url)
-            .placeholder {
-                // Placeholder thumbnail.
-                Image("PodcastThumbnail")
-                
-        }
-        .resizable()
-        .aspectRatio(contentMode: ContentMode.fill)
-        .frame(width: 96, height: 96)
-        .cornerRadius(4)
-        .shadow(radius: 4)
     }
 }

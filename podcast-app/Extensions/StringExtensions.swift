@@ -12,13 +12,16 @@ import Foundation
 
 public extension Int {
     /*
-    Get the total duration of this podcast, in a human readable format.
-    Eg.: "2:04s" (min/seconds)
-    */
-func displayTimeFromSeconds() -> String {
-
+     Get the total duration of this podcast, in a human readable format.
+     Eg.: "2:04" (min/seconds); "15s" (seconds)
+     */
+    func displayTimeFromSeconds() -> String {
+        
         let min = self / 60
         let sec = self - (min*60)
-        return "\(min):\(sec)s"
+        if (min == 0){
+            return "\(String(format: "%02d", sec))s"
+        }
+        return "\(min):\(String(format: "%02d", sec))"
     }
 }

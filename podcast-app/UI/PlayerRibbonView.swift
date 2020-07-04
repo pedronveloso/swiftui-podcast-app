@@ -19,7 +19,8 @@ struct PlayerRibbonView: View {
         
         
         let url = URL(string: podcastItem.imageURL)
-        let shorterTitle = podcastItem.title
+        
+        let progressText = "\(self.playbackManager.mediaState.progressSecondsDisplay()) / \(podcastItem.totalTimeDisplay())"
         
         return ZStack {
             Rectangle()
@@ -33,14 +34,15 @@ struct PlayerRibbonView: View {
                 // Progress
                 VStack{
                     
-                    Text(shorterTitle)
+                    Text(podcastItem.title)
                     .foregroundColor(Color("FontColorMain"))
                         .font(.footnote)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity,
                     alignment: .leading)
                     
-                    Text("2:30 / 14:00")
+                    
+                    Text(progressText)
                     .foregroundColor(Color("FontColorMain"))
                         .font(.footnote)
                     .lineLimit(1)

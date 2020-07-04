@@ -8,54 +8,82 @@
 
 import SwiftUI
 
-struct ContentView: View, NetworkResult  {
+struct ContentView: View {
     
     @ObservedObject var playbackManager = PlaybackManager()
     
-    func loadPodcasts(){
-        let net = NetworkingManager.init(callback: self)
-        net.getFeed()
-    }
-    
-    func onSuccess(podcastPage: PodcastPageDTO) {
-        results.append(podcastPage)
-    }
-    
-    func onFailure(errorMessage: String) {
-        // NOTHING YET.
-    }
-    
     @State var results : [PodcastPageDTO]
+    
+    @ObservedObject var router = Router()
+    
+    //@State private var isShowingDetailView = false
     
     var body: some View {
         UITableView.appearance().separatorStyle = .none
-      UITableViewCell.appearance().backgroundColor = UIColor(named: "LightBackground")
-      UITableView.appearance().backgroundColor = UIColor(named: "LightBackground")
+        UITableViewCell.appearance().backgroundColor = UIColor(named: "LightBackground")
+        UITableView.appearance().backgroundColor = UIColor(named: "LightBackground")
         
-        return ZStack{
-            // Background.
-            Rectangle()
-            .fill(Color("LightBackground"))
+        print("isShowdinDetailsView value: \(self.router.isShowingDetails)")
+        //self.isShowingDetailView = self.router.isShowingDetails
+        
+        return NavigationView {
+            ZStack{
+                // Background.
+                Rectangle()
+                    .fill(Color("LightBackground"))
                 
-            
-        VStack{
+                NavigationLink(destination: PodcastDetails(playbackManager: playbackManager), isActive: $router.isShowingDetails) { EmptyView() }
+                
+                MainScreenView(playbackManager: playbackManager, results: self.results, router: router)
+                
+                
+            }.edgesIgnoringSafeArea(.all)
+        }
+    }
+}
+
+
+struct MainScreenView : View, NetworkResult  {
+    
+    @ObservedObject var playbackManager : PlaybackManager
+    
+    @State var results : [PodcastPageDTO]
+    
+    @ObservedObject var router : Router
+    
+    
+    func loadPodcasts(){
+          let net = NetworkingManager.init(callback: self)
+          net.getFeed()
+      }
+      
+      func onSuccess(podcastPage: PodcastPageDTO) {
+          results.append(podcastPage)
+      }
+      
+      func onFailure(errorMessage: String) {
+          // NOTHING YET.
+      }
+    
+    var body: some View {
+        return VStack{
             if (results.isEmpty == false){
                 HeaderView(podcast: results[0])
                 
                 // Render items.
                 List(results[0].podcasts, id: \.id) { item in
-                        PodcastListItemView(playbackManager: self.playbackManager, podcastItem: item)
+                    PodcastListItemView(playbackManager: self.playbackManager, podcastItem: item)
                 }
                 
                 // Player Ribbon.
                 if (playbackManager.mediaState.selectedPodcast != nil){
-                    PlayerRibbonView(playbackManager: playbackManager)
+                    PlayerRibbonView(playbackManager: playbackManager, router: self.router)
                 }
             } else {
                 // TODO : Show better looking loading state.
                 Text("Loading Podcast")
-                .font(.title)
-                .onAppear(perform: loadPodcasts)
+                    .font(.title)
+                    .onAppear(perform: loadPodcasts)
                 
                 Button(action: {
                     let net = NetworkingManager.init(callback: self)
@@ -65,21 +93,19 @@ struct ContentView: View, NetworkResult  {
                 }
             }
         }
-        }.edgesIgnoringSafeArea(.all)
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         // The following allows us to preview both Light and Dark themes.
         Group {
-             ContentView(results: [podcastPreviewPage])
-              .environment(\.colorScheme, .light)
-
             ContentView(results: [podcastPreviewPage])
-              .environment(\.colorScheme, .dark)
+                .environment(\.colorScheme, .light)
+            
+            ContentView(results: [podcastPreviewPage])
+                .environment(\.colorScheme, .dark)
         }
-       
+        
     }
 }

@@ -23,6 +23,7 @@
 		EB18F46D24AFC69500AE55E1 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F46C24AFC69500AE55E1 /* StringExtensions.swift */; };
 		EB18F47124AFCBAA00AE55E1 /* PlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47024AFCBAA00AE55E1 /* PlaybackManager.swift */; };
 		EB18F47324AFDE3F00AE55E1 /* AVPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47224AFDE3F00AE55E1 /* AVPlayerExtensions.swift */; };
+		EB18F47524B006C800AE55E1 /* PodcastDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18F47424B006C800AE55E1 /* PodcastDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		EB18F46C24AFC69500AE55E1 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		EB18F47024AFCBAA00AE55E1 /* PlaybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackManager.swift; sourceTree = "<group>"; };
 		EB18F47224AFDE3F00AE55E1 /* AVPlayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerExtensions.swift; sourceTree = "<group>"; };
+		EB18F47424B006C800AE55E1 /* PodcastDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				EB18F46524AF763900AE55E1 /* HeaderView.swift */,
 				EB18F46724AF899A00AE55E1 /* PlayerRibbonView.swift */,
 				EB18F46924AFC31700AE55E1 /* UiDimens.swift */,
+				EB18F47424B006C800AE55E1 /* PodcastDetails.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				1E7FFD0324AD4367008977BA /* ContentView.swift in Sources */,
 				1E03668C24AE394500169650 /* PodcastListItemView.swift in Sources */,
 				EB18F46824AF899A00AE55E1 /* PlayerRibbonView.swift in Sources */,
+				EB18F47524B006C800AE55E1 /* PodcastDetails.swift in Sources */,
 				EB18F46424AEB24900AE55E1 /* DevConstants.swift in Sources */,
 				EB18F46624AF763900AE55E1 /* HeaderView.swift in Sources */,
 				EB18F47324AFDE3F00AE55E1 /* AVPlayerExtensions.swift in Sources */,

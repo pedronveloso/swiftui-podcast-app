@@ -12,15 +12,18 @@ import struct Kingfisher.KFImage
 struct PlayerRibbonView: View {
     
     @ObservedObject var playbackManager : PlaybackManager
+    private let previewPodcastItem: PodcastItemDTO = podcastItem1
     
+    @ObservedObject var router : Router
     
     var body: some View {
-        let podcastItem = self.playbackManager.mediaState.selectedPodcast!
-        
-        
+        let podcastItem: PodcastItemDTO
+        if (self.playbackManager.mediaState.selectedPodcast != nil){
+            podcastItem = self.playbackManager.mediaState.selectedPodcast!
+        } else {
+            podcastItem = previewPodcastItem
+        }
         let url = URL(string: podcastItem.imageURL)
-        
-        let progressText = "\(self.playbackManager.mediaState.progressSecondsDisplay()) / \(podcastItem.totalTimeDisplay())"
         
         return ZStack {
             Rectangle()
@@ -31,38 +34,57 @@ struct PlayerRibbonView: View {
                 Spacer().frame(width: sideMargin)
                 RibbonCoverArt(url: url)
                 
-                // Progress
-                VStack{
-                    
-                    Text(podcastItem.title)
-                    .foregroundColor(Color("FontColorMain"))
-                        .font(.footnote)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity,
-                    alignment: .leading)
-                    
-                    
-                    Text(progressText)
-                    .foregroundColor(Color("FontColorMain"))
-                        .font(.footnote)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity,
-                    alignment: .leading)
+                // Title and Progress.
+                Button(action: {
+                    print("Click to show details")
+                    self.router.isShowingDetails = true
+
+                }) {
+                    VStack{
+                        
+                        Text(podcastItem.title)
+                        .foregroundColor(Color("FontColorMain"))
+                            .font(.footnote)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity,
+                        alignment: .leading)
+                        
+                        PlaybackTextProgressView(playbackManager: playbackManager, podcastItem: podcastItem, align: .leading)
+                        
+                    }
                 }
+                
                 
                 Spacer()
                 PlaybackControlsView(playbackManager: playbackManager)
                 Spacer().frame(width: sideMargin*2)
             }
         }
-            
         .frame(maxWidth: .infinity)
     }
 }
 
 struct PlayerRibbonView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerRibbonView(playbackManager: PlaybackManager())
+        PlayerRibbonView(playbackManager: PlaybackManager(), router: Router())
+    }
+}
+
+struct PlaybackTextProgressView : View {
+    
+    @ObservedObject var playbackManager : PlaybackManager
+    let podcastItem: PodcastItemDTO
+    let align: Alignment
+    
+    var body : some View {
+        let progressText = "\(self.playbackManager.mediaState.progressSecondsDisplay()) / \(podcastItem.totalTimeDisplay())"
+        
+        return Text(progressText)
+        .foregroundColor(Color("FontColorMain"))
+            .font(.footnote)
+        .lineLimit(1)
+        .frame(maxWidth: .infinity,
+        alignment: align)
     }
 }
 

@@ -35,6 +35,10 @@ struct MediaState{
     
 }
 
+class Router: ObservableObject {
+    @Published var isShowingDetails = false
+}
+
 class PlaybackManager : ObservableObject {
     
    @Published var mediaState = MediaState()

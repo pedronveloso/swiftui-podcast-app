@@ -8,42 +8,17 @@
 
 import Foundation
 
-public extension String {
-  subscript(value: Int) -> Character {
-    self[index(at: value)]
-  }
-}
 
-public extension String {
-  subscript(value: NSRange) -> Substring {
-    self[value.lowerBound..<value.upperBound]
-  }
-}
 
-public extension String {
-  subscript(value: CountableClosedRange<Int>) -> Substring {
-    self[index(at: value.lowerBound)...index(at: value.upperBound)]
-  }
+public extension Int {
+    /*
+    Get the total duration of this podcast, in a human readable format.
+    Eg.: "2:04s" (min/seconds)
+    */
+func displayTimeFromSeconds() -> String {
 
-  subscript(value: CountableRange<Int>) -> Substring {
-    self[index(at: value.lowerBound)..<index(at: value.upperBound)]
-  }
-
-  subscript(value: PartialRangeUpTo<Int>) -> Substring {
-    self[..<index(at: value.upperBound)]
-  }
-
-  subscript(value: PartialRangeThrough<Int>) -> Substring {
-    self[...index(at: value.upperBound)]
-  }
-
-  subscript(value: PartialRangeFrom<Int>) -> Substring {
-    self[index(at: value.lowerBound)...]
-  }
-}
-
-private extension String {
-  func index(at offset: Int) -> String.Index {
-    index(startIndex, offsetBy: offset)
-  }
+        let min = self / 60
+        let sec = self - (min*60)
+        return "\(min):\(sec)s"
+    }
 }

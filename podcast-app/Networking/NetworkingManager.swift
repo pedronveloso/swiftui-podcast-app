@@ -25,9 +25,7 @@ struct PodcastItemDTO : Decodable {
      */
     func totalTimeDisplay() -> String {
         if let firstElem = playbackItems.first {
-            let min = firstElem.durationInSeconds / 60
-            let sec = firstElem.durationInSeconds - (min*60)
-            return "\(min):\(sec)s"
+            return firstElem.durationInSeconds.displayTimeFromSeconds()
         } else {
             return "N/A"
         }

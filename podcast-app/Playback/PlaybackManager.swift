@@ -29,6 +29,10 @@ struct MediaState{
         return state == PlaybackState.PLAYING
     }
     
+    func progressSecondsDisplay() -> String {
+        return currentProgressInSeconds.displayTimeFromSeconds()
+    }
+    
 }
 
 class PlaybackManager : ObservableObject {
@@ -83,6 +87,40 @@ class PlaybackManager : ObservableObject {
            } else {
                playMedia(with: podcast)
            }
+    }
+    
+    func rewindPlayback(){
+        let secondsToAdvance = 10.0
+        
+        let playerCurrentTime = CMTimeGetSeconds(avPlayer.currentTime())
+            var newTime = playerCurrentTime - secondsToAdvance
+
+            if newTime < 0 {
+                newTime = 0
+            }
+        let timeResult: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+        avPlayer.seek(to: timeResult, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+    }
+    
+    func forwardPlayback(){
+        let secondsToAdvance = 10.0
+        
+        guard let duration  = avPlayer.currentItem?.duration else {
+            return
+        }
+        let playerCurrentTime = CMTimeGetSeconds(avPlayer.currentTime())
+        let newTime = playerCurrentTime + secondsToAdvance
+
+        if newTime < (CMTimeGetSeconds(duration) - secondsToAdvance) {
+
+            let timeResult: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+            avPlayer.seek(to: timeResult, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+
+        }
+    }
+    
+    func seekToPosition(position: Float){
+        // TODO
     }
     
     func play(podcast: PodcastItemDTO){

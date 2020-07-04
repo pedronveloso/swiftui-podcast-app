@@ -78,6 +78,7 @@ struct PlaybackControlsView : View {
         
         return HStack{
             Button(action: {
+                self.playbackManager.rewindPlayback()
               print("back button pressed")
 
             }) {
@@ -102,9 +103,15 @@ struct PlaybackControlsView : View {
             Spacer()
             .frame(width: 20)
             
-            Image(systemName: "goforward.10")
-            .imageScale(.large)
-            .foregroundColor(Color.white)
+            Button(action: {
+                self.playbackManager.forwardPlayback()
+              print("forward button pressed")
+
+            }) {
+                Image(systemName: "goforward.10")
+                .imageScale(.large)
+                .foregroundColor(Color.white)
+            }
         }
     }
 }
